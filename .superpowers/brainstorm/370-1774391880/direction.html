@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnolia — Visual Direction</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f0f0f;
+    color: #f0ebe0;
+    font-family: 'Georgia', serif;
+    padding: 40px 24px 60px;
+    min-height: 100vh;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    color: #f0ebe0;
+  }
+  .header p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(240,235,224,0.5);
+    letter-spacing: 0.08em;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+  }
+  .card:hover { transform: translateY(-4px); }
+  .card.selected { border-color: #C9A84C; }
+
+  .card-preview {
+    height: 320px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    overflow: hidden;
+  }
+
+  /* DIRECTION A — Deep Forest Editorial (current evolved) */
+  .card-a .card-preview {
+    background: linear-gradient(160deg, #0A1A0C 0%, #162B18 60%, #0A1A0C 100%);
+  }
+  .card-a .magnolia-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    opacity: 0.07;
+    font-size: 180px;
+    color: #C9A84C;
+  }
+  .card-a .preview-tag {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    margin-bottom: 10px;
+  }
+  .card-a .preview-h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2.6rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 0.9;
+    color: #f5f0e8;
+    margin-bottom: 6px;
+  }
+  .card-a .preview-h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #C9A84C;
+    display: block;
+  }
+  .card-a .preview-sub {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.45);
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .card-a .preview-cta {
+    display: inline-block;
+    background: #C9A84C;
+    color: #0A1A0C;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  /* DIRECTION B — American Heritage / Warm Americana */
+  .card-b .card-preview {
+    background: linear-gradient(180deg, #1A0E05 0%, #2C1608 40%, #1A0E05 100%);
+  }
+  .card-b .preview-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #B5451B, #D4622A, #B5451B);
+  }
+  .card-b .preview-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(181,69,27,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Georgia', serif;
+    font-size: 0.45rem;
+    font-style: italic;
+    color: #B5451B;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .card-b .preview-tag {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #B5451B;
+    margin-bottom: 10px;
+  }
+  .card-b .preview-h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 0.95;
+    color: #F5ECD8;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .card-b .preview-sub {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(245,236,216,0.45);
+    margin-bottom: 16px;
+  }
+  .card-b .preview-cta {
+    display: inline-block;
+    background: #B5451B;
+    color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  /* DIRECTION C — Clean Cream Luxury */
+  .card-c .card-preview {
+    background: #F4EDD8;
+    justify-content: flex-start;
+    padding-top: 28px;
+  }
+  .card-c .preview-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  .card-c .preview-logo {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #1A2C1C;
+    font-weight: 600;
+  }
+  .card-c .preview-navlinks {
+    font-size: 0.5rem;
+    color: rgba(26,44,28,0.45);
+    letter-spacing: 0.1em;
+    display: flex;
+    gap: 14px;
+  }
+  .card-c .preview-tag {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #1A6B3C;
+    margin-bottom: 10px;
+  }
+  .card-c .preview-h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2.8rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 0.88;
+    color: #1A2C1C;
+    margin-bottom: 10px;
+  }
+  .card-c .preview-h1 strong {
+    font-weight: 700;
+    color: #1A6B3C;
+  }
+  .card-c .preview-sub {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.65rem;
+    color: rgba(26,44,28,0.55);
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  .card-c .preview-cta {
+    display: inline-block;
+    background: #1A2C1C;
+    color: #F4EDD8;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  .card-label {
+    padding: 18px 20px;
+    background: #1a1a1a;
+  }
+  .card-label h3 {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: #f0ebe0;
+  }
+  .card-label p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(240,235,224,0.45);
+    line-height: 1.5;
+  }
+  .card-label .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .pill {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: rgba(240,235,224,0.07);
+    color: rgba(240,235,224,0.5);
+  }
+  .selected-badge {
+    display: none;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #C9A84C;
+    color: #0A1A0C;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    z-index: 10;
+  }
+  .card.selected .selected-badge { display: block; }
+
+  .question-label {
+    text-align: center;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(240,235,224,0.35);
+    margin-bottom: 28px;
+  }
+</style>
+<script>
+  function select(el) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const choice = el.dataset.choice;
+    const label = el.querySelector('h3').textContent;
+    if (window.recordChoice) recordChoice(choice, label);
+    try { fetch('/__select', { method:'POST', body: JSON.stringify({ choice, label }) }).catch(()=>{}) } catch(e) {}
+  }
+</script>
+</head>
+<body>
+
+<div class="header">
+  <h1>Magnolia Home Buyers — Full Revamp</h1>
+  <p>QUESTION 1 OF 3 · VISUAL DIRECTION</p>
+</div>
+
+<p class="question-label">Which direction should the new site go?</p>
+
+<div class="cards">
+
+  <!-- A: Deep Forest Editorial -->
+  <div class="card card-a" data-choice="a" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="card-preview">
+        <div class="magnolia-bg">✿</div>
+        <div class="preview-tag">Nationwide Cash Home Buyers</div>
+        <div class="preview-h1">
+          We Buy Your
+          <span>Home.</span>
+          Fast. Cash.
+        </div>
+        <div class="preview-sub">Get a fair cash offer in 24 hours. Any condition, anywhere.</div>
+        <div class="preview-cta">Get My Cash Offer</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>A — Deep Forest Editorial</h3>
+      <p>Current direction pushed much further. Massive italic type, dramatic dark green, editorial cream contrast sections. More luxury real estate energy.</p>
+      <div class="pill-row">
+        <span class="pill">Dark Dominant</span>
+        <span class="pill">Gold Accents</span>
+        <span class="pill">Cormorant Garamond</span>
+        <span class="pill">Premium</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: American Heritage -->
+  <div class="card card-b" data-choice="b" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="card-preview">
+        <div class="preview-stripe"></div>
+        <div class="preview-badge">Est.<br/>2018<br/>USA</div>
+        <div class="preview-tag">We Buy Houses · Nationwide</div>
+        <div class="preview-h1">Your Home.<br/>Sold Fast.</div>
+        <div class="preview-sub">Cash in hand, as few as 7 days. No repairs, no fees.</div>
+        <div class="preview-cta">Get Cash Offer Now</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>B — American Heritage</h3>
+      <p>Warm bourbon-and-rust tones. Trust-forward, bold serif, badge-heavy. Feels more like a family business, approachable and patriotic.</p>
+      <div class="pill-row">
+        <span class="pill">Warm Dark</span>
+        <span class="pill">Rust Accents</span>
+        <span class="pill">Bold Serif</span>
+        <span class="pill">Trust Signals</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- C: Clean Cream Luxury -->
+  <div class="card card-c" data-choice="c" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="card-preview">
+        <div class="preview-nav">
+          <span class="preview-logo">Magnolia</span>
+          <div class="preview-navlinks">
+            <span>How It Works</span>
+            <span>About</span>
+            <span>Contact</span>
+          </div>
+        </div>
+        <div class="preview-tag">Cash Home Buyers · Since 2018</div>
+        <div class="preview-h1">Sell your home<br/><strong>fast & fair.</strong></div>
+        <div class="preview-sub">Fair cash offer in 24 hours. No repairs, no agent fees, no hassle.</div>
+        <div class="preview-cta">Get My Offer</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>C — Light & Refined</h3>
+      <p>Cream/white dominant with deep forest green accents. Clean, trustworthy, modern. Feels more like a fintech startup than a traditional real estate company.</p>
+      <div class="pill-row">
+        <span class="pill">Cream Dominant</span>
+        <span class="pill">Green Accents</span>
+        <span class="pill">Modern Clean</span>
+        <span class="pill">Approachable</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:32px; font-family:'Helvetica Neue',sans-serif; font-size:0.72rem; color:rgba(240,235,224,0.3); letter-spacing:0.06em;">
+  Click a card to select · Then reply in terminal
+</p>
+
+</body>
+</html>

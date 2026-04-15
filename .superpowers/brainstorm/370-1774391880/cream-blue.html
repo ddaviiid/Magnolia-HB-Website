@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnolia — Cream + Blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #EDEBE6; font-family: 'DM Sans', sans-serif; padding: 36px 20px 60px; }
+  .header { text-align: center; margin-bottom: 10px; }
+  .header h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; color: #1A1A1A; }
+  .question-label { text-align: center; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(26,26,26,0.4); margin-bottom: 30px; }
+  .note { text-align:center; font-size:0.67rem; color:rgba(26,26,26,0.45); margin-bottom:28px; background:rgba(0,0,0,0.06); padding:8px 16px; border-radius:4px; max-width:600px; margin-left:auto; margin-right:auto; }
+  .note span { color: #2B5BA8; font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1100px; margin: 0 auto; }
+  @media(max-width:700px){ .grid { grid-template-columns: 1fr; } }
+
+  .card { border-radius: 6px; overflow: hidden; cursor: pointer; border: 3px solid transparent; transition: border-color 0.2s, transform 0.15s; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+  .card:hover { transform: translateY(-3px); }
+  .card.selected { border-color: #2B5BA8; }
+  .badge { display:none; position:absolute; top:10px; left:10px; background:#2B5BA8; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.55rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; border-radius:3px; z-index:10; }
+  .card.selected .badge { display:block; }
+
+  /* ── SHARED HERO STRUCTURE ── */
+  .hero {
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 44px; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 22px;
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: -0.02em; }
+  .nav-links { font-size: 0.5rem; display: flex; gap: 16px; opacity: 0.5; font-family: 'DM Sans', sans-serif; }
+  .nav-cta { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
+
+  .eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.52rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+  .h1 { font-family: 'Syne', sans-serif; font-weight: 800; line-height: 0.87; letter-spacing: -0.03em; margin-bottom: 10px; }
+  .h1 .big { font-size: 4rem; display: block; }
+  .h1 .outline { font-size: 5rem; display: block; color: transparent; }
+  .h1 .small { font-size: 2.4rem; display: block; }
+  .sub { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.7rem; line-height: 1.7; margin-bottom: 16px; }
+  .cta { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 20px; border-radius: 3px; display: inline-block; }
+
+  /* Section strip */
+  .strip { height: 58px; display: flex; align-items: center; padding: 0 22px; gap: 14px; }
+  .strip-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em; opacity: 0.18; }
+  .strip-divider { flex: 1; height: 1px; opacity: 0.15; }
+  .strip-text { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; }
+
+  /* Bottom strip */
+  .card-label { padding: 14px 18px; }
+  .card-label h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: -0.02em; margin-bottom: 3px; }
+  .card-label p { font-size: 0.67rem; line-height: 1.55; }
+  .swatches { display: flex; gap: 6px; margin-top: 10px; align-items: center; }
+  .sw { width: 20px; height: 20px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.08); }
+  .sw-label { font-size: 0.52rem; margin-left: 4px; opacity: 0.5; }
+
+
+  /* ══ OPTION 1: CREAM + STEEL BLUE ══ */
+  .o1 .hero    { background: #F5F0E6; }
+  .o1 .nav     { background: #F5F0E6; }
+  .o1 .logo    { color: #1A1A1A; }
+  .o1 .nav-links { color: #1A1A1A; }
+  .o1 .nav-cta { background: #2B5BA8; color: #fff; }
+  .o1 .eyebrow { color: #2B5BA8; }
+  .o1 .h1 .big  { color: #1A1A1A; }
+  .o1 .h1 .outline { -webkit-text-stroke: 2px #2B5BA8; }
+  .o1 .h1 .small { color: #1A1A1A; }
+  .o1 .sub     { color: rgba(26,26,26,0.5); }
+  .o1 .cta     { background: #1A1A1A; color: #F5F0E6; }
+  .o1 .strip   { background: #2B5BA8; }
+  .o1 .strip-num { color: #fff; }
+  .o1 .strip-divider { background: #fff; }
+  .o1 .strip-text { color: #fff; }
+  .o1 .card-label { background: #1A1A1A; }
+  .o1 .card-label h3 { color: #F5F0E6; }
+  .o1 .card-label p { color: rgba(245,240,230,0.45); }
+
+  /* ══ OPTION 2: CREAM + NAVY ══ */
+  .o2 .hero    { background: #F2EDE2; }
+  .o2 .nav     { background: #F2EDE2; }
+  .o2 .logo    { color: #0E1D3D; }
+  .o2 .nav-links { color: #0E1D3D; }
+  .o2 .nav-cta { border: 1.5px solid #0E1D3D; color: #0E1D3D; }
+  .o2 .eyebrow { color: #4A7FC1; }
+  .o2 .h1 .big  { color: #0E1D3D; }
+  .o2 .h1 .outline { -webkit-text-stroke: 2px #0E1D3D; }
+  .o2 .h1 .small { color: #4A7FC1; }
+  .o2 .sub     { color: rgba(14,29,61,0.45); }
+  .o2 .cta     { background: #0E1D3D; color: #F2EDE2; }
+  .o2 .strip   { background: #F2EDE2; border-top: 1px solid rgba(14,29,61,0.12); }
+  .o2 .strip-num { color: #0E1D3D; }
+  .o2 .strip-divider { background: #0E1D3D; }
+  .o2 .strip-text { color: #0E1D3D; }
+  .o2 .card-label { background: #0E1D3D; }
+  .o2 .card-label h3 { color: #F2EDE2; }
+  .o2 .card-label p { color: rgba(242,237,226,0.45); }
+
+  /* ══ OPTION 3: WHITE + SLATE BLUE (bold contrast) ══ */
+  .o3 .hero    { background: #FAFAF8; }
+  .o3 .nav     { background: #FAFAF8; }
+  .o3 .logo    { color: #1A1A1A; }
+  .o3 .nav-links { color: #1A1A1A; }
+  .o3 .nav-cta { background: #3D5A99; color: #fff; }
+  .o3 .eyebrow { color: #3D5A99; }
+  .o3 .h1 .big  { color: #1A1A1A; }
+  .o3 .h1 .outline { -webkit-text-stroke: 2.5px #3D5A99; font-size: 5.5rem; }
+  .o3 .h1 .small { color: #1A1A1A; }
+  .o3 .sub     { color: rgba(26,26,26,0.45); }
+  .o3 .cta     { background: #3D5A99; color: #fff; }
+  .o3 .strip   { background: #F0F0EC; border-top: 1px solid rgba(26,26,26,0.08); }
+  .o3 .strip-num { color: #3D5A99; }
+  .o3 .strip-divider { background: #3D5A99; }
+  .o3 .strip-text { color: #1A1A1A; }
+  .o3 .card-label { background: #3D5A99; }
+  .o3 .card-label h3 { color: #fff; }
+  .o3 .card-label p { color: rgba(255,255,255,0.55); }
+
+  /* ══ OPTION 4: CREAM + DENIM (warm blue) ══ */
+  .o4 .hero {
+    background: linear-gradient(160deg, #1B3A6B 0%, #2A5298 50%, #1B3A6B 100%);
+  }
+  .o4 .nav     { background: transparent; }
+  .o4 .logo    { color: #F5F0E6; }
+  .o4 .nav-links { color: #F5F0E6; }
+  .o4 .nav-cta { border: 1px solid rgba(245,240,230,0.4); color: #F5F0E6; }
+  .o4 .eyebrow { color: #F5C842; }
+  .o4 .h1 .big  { color: #F5F0E6; }
+  .o4 .h1 .outline { -webkit-text-stroke: 2px #F5C842; }
+  .o4 .h1 .small { color: #F5F0E6; }
+  .o4 .sub     { color: rgba(245,240,230,0.55); }
+  .o4 .cta     { background: #F5C842; color: #1B3A6B; }
+  .o4 .strip   { background: #F5F0E6; }
+  .o4 .strip-num { color: #2A5298; }
+  .o4 .strip-divider { background: #2A5298; }
+  .o4 .strip-text { color: #1A1A1A; }
+  .o4 .card-label { background: #F5F0E6; border-top: 1px solid rgba(26,26,26,0.08); }
+  .o4 .card-label h3 { color: #1B3A6B; }
+  .o4 .card-label p { color: rgba(27,58,107,0.55); }
+</style>
+<script>
+  function pick(el) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const choice = el.dataset.choice, label = el.querySelector('h3').textContent;
+    try { fetch('/__select', { method:'POST', body: JSON.stringify({ choice, label }) }).catch(()=>{}) } catch(e) {}
+  }
+</script>
+</head>
+<body>
+
+<div class="header"><h1>Cream + Blue Palette · Helotypo Direction</h1></div>
+<p class="question-label">Typography: Syne 800 as stand-in for Helotypo · Click to select</p>
+<p class="note">⚡ <span>Helotypo</span> = paid Envato font. Download from your subscription → we self-host it. Syne shown here as the closest free match for mockup purposes.</p>
+
+<div class="grid">
+
+  <!-- 1: Cream + Steel Blue -->
+  <div class="card o1" data-choice="1" onclick="pick(this)">
+    <div style="position:relative">
+      <div class="badge">Selected</div>
+      <div class="hero o1">
+        <div class="nav o1">
+          <span class="logo o1">MAGNOLIA</span>
+          <div class="nav-links o1"><span>How It Works</span><span>About</span><span>FAQ</span></div>
+          <span class="nav-cta o1">Get Offer</span>
+        </div>
+        <span class="eyebrow o1">Nationwide Cash Home Buyers</span>
+        <div class="h1 o1">
+          <span class="big o1">We Buy Your</span>
+          <span class="outline o1">Home.</span>
+          <span class="small o1">Fast. Cash.</span>
+        </div>
+        <p class="sub o1">Fair cash offer in 24 hours. No repairs, no agent fees, no hassle.</p>
+        <span class="cta o1">Get My Cash Offer</span>
+      </div>
+      <div class="strip o1">
+        <span class="strip-num o1">01</span>
+        <div class="strip-divider o1"></div>
+        <span class="strip-text o1">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="card-label o1">
+      <h3>Cream + Steel Blue</h3>
+      <p>Warm cream dominant, steel blue (#2B5BA8) as primary action colour. Clean, trustworthy, modern.</p>
+      <div class="swatches">
+        <div class="sw" style="background:#F5F0E6"></div>
+        <div class="sw" style="background:#2B5BA8"></div>
+        <div class="sw" style="background:#1A1A1A"></div>
+        <span class="sw-label">Cream · Steel Blue · Charcoal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2: Cream + Navy -->
+  <div class="card o2" data-choice="2" onclick="pick(this)">
+    <div style="position:relative">
+      <div class="badge">Selected</div>
+      <div class="hero o2">
+        <div class="nav o2">
+          <span class="logo o2">MAGNOLIA</span>
+          <div class="nav-links o2"><span>How It Works</span><span>About</span><span>FAQ</span></div>
+          <span class="nav-cta o2">Get Offer</span>
+        </div>
+        <span class="eyebrow o2">Nationwide Cash Home Buyers</span>
+        <div class="h1 o2">
+          <span class="big o2">We Buy Your</span>
+          <span class="outline o2">Home.</span>
+          <span class="small o2">Fast. Cash.</span>
+        </div>
+        <p class="sub o2">Fair cash offer in 24 hours. No repairs, no agent fees, no hassle.</p>
+        <span class="cta o2">Get My Cash Offer</span>
+      </div>
+      <div class="strip o2">
+        <span class="strip-num o2">01</span>
+        <div class="strip-divider o2"></div>
+        <span class="strip-text o2">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="card-label o2">
+      <h3>Cream + Deep Navy</h3>
+      <p>Warm cream + deep navy (#0E1D3D). The most professional, authoritative feel. Blue accent pops on cream sections.</p>
+      <div class="swatches">
+        <div class="sw" style="background:#F2EDE2"></div>
+        <div class="sw" style="background:#0E1D3D"></div>
+        <div class="sw" style="background:#4A7FC1"></div>
+        <span class="sw-label">Warm Cream · Navy · Sky Blue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3: Off-white + Slate Blue -->
+  <div class="card o3" data-choice="3" onclick="pick(this)">
+    <div style="position:relative">
+      <div class="badge">Selected</div>
+      <div class="hero o3">
+        <div class="nav o3">
+          <span class="logo o3">MAGNOLIA</span>
+          <div class="nav-links o3"><span>How It Works</span><span>About</span><span>FAQ</span></div>
+          <span class="nav-cta o3">Get Offer</span>
+        </div>
+        <span class="eyebrow o3">Nationwide Cash Home Buyers</span>
+        <div class="h1 o3">
+          <span class="big o3">We Buy Your</span>
+          <span class="outline o3">Home.</span>
+          <span class="small o3">Fast. Cash.</span>
+        </div>
+        <p class="sub o3">Fair cash offer in 24 hours. No repairs, no agent fees, no hassle.</p>
+        <span class="cta o3">Get My Cash Offer</span>
+      </div>
+      <div class="strip o3">
+        <span class="strip-num o3">01</span>
+        <div class="strip-divider o3"></div>
+        <span class="strip-text o3">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="card-label o3">
+      <h3>Off-white + Slate Blue</h3>
+      <p>Near-white base (#FAFAF8) + slate blue (#3D5A99). Highest contrast, crispest. Feels like a premium fintech or SaaS product.</p>
+      <div class="swatches">
+        <div class="sw" style="background:#FAFAF8; border:1px solid #ddd"></div>
+        <div class="sw" style="background:#3D5A99"></div>
+        <div class="sw" style="background:#1A1A1A"></div>
+        <span class="sw-label">Off-white · Slate · Charcoal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: Blue dominant + cream + gold -->
+  <div class="card o4" data-choice="4" onclick="pick(this)">
+    <div style="position:relative">
+      <div class="badge">Selected</div>
+      <div class="hero o4">
+        <div class="nav o4">
+          <span class="logo o4">MAGNOLIA</span>
+          <div class="nav-links o4"><span>How It Works</span><span>About</span><span>FAQ</span></div>
+          <span class="nav-cta o4">Get Offer</span>
+        </div>
+        <span class="eyebrow o4">Nationwide Cash Home Buyers</span>
+        <div class="h1 o4">
+          <span class="big o4">We Buy Your</span>
+          <span class="outline o4">Home.</span>
+          <span class="small o4">Fast. Cash.</span>
+        </div>
+        <p class="sub o4">Fair cash offer in 24 hours. No repairs, no agent fees, no hassle.</p>
+        <span class="cta o4">Get My Cash Offer</span>
+      </div>
+      <div class="strip o4">
+        <span class="strip-num o4">01</span>
+        <div class="strip-divider o4"></div>
+        <span class="strip-text o4">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="card-label o4">
+      <h3>Denim Blue hero + Cream sections</h3>
+      <p>Dark denim blue (#1B3A6B) hero, cream content sections. Gold replaces green as the accent. Closest to Helotypo's own promo colors.</p>
+      <div class="swatches">
+        <div class="sw" style="background:#1B3A6B"></div>
+        <div class="sw" style="background:#F5F0E6"></div>
+        <div class="sw" style="background:#F5C842"></div>
+        <span class="sw-label">Denim · Cream · Gold</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:24px; font-size:0.62rem; color:rgba(26,26,26,0.3); letter-spacing:0.06em; font-family:'DM Sans',sans-serif;">
+  All use Syne 800 as Helotypo stand-in · Real font swapped in after download · Click to select
+</p>
+
+</body>
+</html>

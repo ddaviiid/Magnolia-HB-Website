@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helotypo — Font Match</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #F9F6F0;
+    color: #1A1A1A;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 40px 24px 60px;
+    min-height: 100vh;
+  }
+
+  .header { text-align: center; margin-bottom: 10px; }
+  .header h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; color: #1A1A1A; letter-spacing: -0.03em; }
+  .sub-label { text-align: center; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(26,26,26,0.4); margin-bottom: 40px; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  @media(max-width:700px){ .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #fff;
+    border-radius: 6px;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: rgba(0,0,0,0.2); }
+  .card.winner { border-color: #2B5BA8; }
+  .card.self-host { border-color: #1A1A1A; background: #1A1A1A; }
+
+  .preview {
+    padding: 28px 24px 22px;
+    background: #FAFAFA;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .card.self-host .preview { background: #141414; border-bottom-color: rgba(255,255,255,0.05); }
+
+  .alpha {
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #1A1A1A;
+    margin-bottom: 6px;
+  }
+  .card.self-host .alpha { color: #F9F6F0; }
+
+  .sample-sentence {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #1A1A1A;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .card.self-host .sample-sentence { color: #F9F6F0; }
+
+  .glyphs {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: rgba(26,26,26,0.45);
+    letter-spacing: 0.04em;
+  }
+  .card.self-host .glyphs { color: rgba(249,246,240,0.35); }
+
+  .meta { padding: 14px 20px; }
+  .card.self-host .meta { background: #1A1A1A; }
+
+  .font-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card.self-host .font-name { color: #F9F6F0; }
+
+  .badge {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .badge-best { background: #2B5BA8; color: #fff; }
+  .badge-free { background: rgba(26,26,26,0.08); color: rgba(26,26,26,0.55); }
+  .badge-exact { background: #1A1A1A; color: #F9F6F0; }
+
+  .font-desc {
+    font-size: 0.68rem;
+    color: rgba(26,26,26,0.45);
+    line-height: 1.55;
+  }
+  .card.self-host .font-desc { color: rgba(249,246,240,0.4); }
+
+  .match-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .bar-label { font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(26,26,26,0.35); width: 52px; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 3px; background: rgba(26,26,26,0.08); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; background: #2B5BA8; }
+  .card.winner .bar-fill { background: #2B5BA8; }
+  .card.self-host .bar-fill { background: #F9F6F0; }
+  .card.self-host .bar-label { color: rgba(249,246,240,0.3); }
+  .card.self-host .bar-track { background: rgba(249,246,240,0.06); }
+
+  .divider { grid-column: 1/-1; border: none; border-top: 1px solid rgba(26,26,26,0.08); margin: 8px 0; }
+
+  .section-label {
+    grid-column: 1/-1;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.35);
+    margin-bottom: -4px;
+  }
+
+  .note {
+    grid-column: 1/-1;
+    background: #fff;
+    border: 1.5px solid rgba(43,91,168,0.25);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-size: 0.72rem;
+    line-height: 1.7;
+    color: rgba(26,26,26,0.6);
+  }
+  .note strong { color: #1A1A1A; font-weight: 600; }
+  .note code {
+    background: rgba(43,91,168,0.08);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    color: #2B5BA8;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Helotypo — Font Match Options</h1>
+</div>
+<p class="sub-label">Closest alternatives · Self-host for exact match</p>
+
+<div class="grid">
+
+  <p class="section-label">Free alternatives (Google Fonts)</p>
+
+  <!-- Plus Jakarta Sans — BEST MATCH -->
+  <div class="card winner">
+    <div class="preview">
+      <div class="alpha" style="font-family:'Plus Jakarta Sans',sans-serif;">Aa Bb</div>
+      <div class="sample-sentence" style="font-family:'Plus Jakarta Sans',sans-serif;">Sell Your Home<br>Fast. Cash.</div>
+      <div class="glyphs" style="font-family:'Plus Jakarta Sans',sans-serif;">0123456789 ABCDEFG abcdefg &amp; $ % !</div>
+    </div>
+    <div class="meta">
+      <div class="font-name">
+        Plus Jakarta Sans
+        <span class="badge badge-best">Closest Match</span>
+        <span class="badge badge-free">Free</span>
+      </div>
+      <div class="font-desc">Geometric grotesque with rounded terminals — nearly identical weight distribution and lowercase height to Helotypo. Very close at 700–800.</div>
+      <div class="match-bar"><span class="bar-label">Match</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">88%</span></div>
+      <div class="match-bar"><span class="bar-label">Feel</span><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">85%</span></div>
+    </div>
+  </div>
+
+  <!-- Outfit -->
+  <div class="card">
+    <div class="preview">
+      <div class="alpha" style="font-family:'Outfit',sans-serif;">Aa Bb</div>
+      <div class="sample-sentence" style="font-family:'Outfit',sans-serif;">Sell Your Home<br>Fast. Cash.</div>
+      <div class="glyphs" style="font-family:'Outfit',sans-serif;">0123456789 ABCDEFG abcdefg &amp; $ % !</div>
+    </div>
+    <div class="meta">
+      <div class="font-name">
+        Outfit
+        <span class="badge badge-free">Free</span>
+      </div>
+      <div class="font-desc">Clean geometric sans with slightly wider forms. Very readable, slightly more open than Helotypo. Good fallback, already installed in this project.</div>
+      <div class="match-bar"><span class="bar-label">Match</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">72%</span></div>
+      <div class="match-bar"><span class="bar-label">Feel</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">78%</span></div>
+    </div>
+  </div>
+
+  <!-- DM Sans -->
+  <div class="card">
+    <div class="preview">
+      <div class="alpha" style="font-family:'DM Sans',sans-serif;">Aa Bb</div>
+      <div class="sample-sentence" style="font-family:'DM Sans',sans-serif;">Sell Your Home<br>Fast. Cash.</div>
+      <div class="glyphs" style="font-family:'DM Sans',sans-serif;">0123456789 ABCDEFG abcdefg &amp; $ % !</div>
+    </div>
+    <div class="meta">
+      <div class="font-name">
+        DM Sans
+        <span class="badge badge-free">Free</span>
+      </div>
+      <div class="font-desc">Slightly more neutral, less personality than Helotypo. Very professional but lacks the geometric punch. Better as a body font.</div>
+      <div class="match-bar"><span class="bar-label">Match</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">65%</span></div>
+      <div class="match-bar"><span class="bar-label">Feel</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">68%</span></div>
+    </div>
+  </div>
+
+  <!-- Syne -->
+  <div class="card">
+    <div class="preview">
+      <div class="alpha" style="font-family:'Syne',sans-serif;">Aa Bb</div>
+      <div class="sample-sentence" style="font-family:'Syne',sans-serif;">Sell Your Home<br>Fast. Cash.</div>
+      <div class="glyphs" style="font-family:'Syne',sans-serif;">0123456789 ABCDEFG abcdefg &amp; $ % !</div>
+    </div>
+    <div class="meta">
+      <div class="font-name">
+        Syne
+        <span class="badge badge-free">Free</span>
+      </div>
+      <div class="font-desc">More editorial personality than Helotypo — irregular letter spacing at high weights. Great if you want more character, less neutral-geometric than Helotypo.</div>
+      <div class="match-bar"><span class="bar-label">Match</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">55%</span></div>
+      <div class="match-bar"><span class="bar-label">Feel</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span style="font-size:0.62rem;color:rgba(26,26,26,0.4);">75%</span></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="section-label">Self-host from Envato (exact match)</p>
+
+  <!-- Self-host -->
+  <div class="card self-host" style="grid-column:1/-1;">
+    <div class="preview" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <div style="font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(249,246,240,0.3);margin-bottom:8px;">Helotypo Light 300</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:2.2rem;color:#F9F6F0;letter-spacing:-0.03em;line-height:1.1;">Magnolia</div>
+      </div>
+      <div>
+        <div style="font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(249,246,240,0.3);margin-bottom:8px;">Helotypo Bold 700</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.2rem;color:#F9F6F0;letter-spacing:-0.04em;line-height:1.1;">Home Buyers</div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="font-name">
+        Helotypo — Self-Hosted
+        <span class="badge badge-exact">100% Match</span>
+      </div>
+      <div class="font-desc" style="margin-bottom:12px;">Download from your Envato Elements subscription → place .woff2/.woff files in <code>public/fonts/helotypo/</code> → use <code>next/font/local</code>. Two-minute setup, exact match.</div>
+      <div style="background:rgba(249,246,240,0.04);border:1px solid rgba(249,246,240,0.08);border-radius:4px;padding:12px 14px;font-size:0.65rem;line-height:1.8;color:rgba(249,246,240,0.5);">
+        <span style="color:rgba(249,246,240,0.3);">// app/layout.tsx</span><br>
+        <span style="color:#93C5FD;">import</span> localFont <span style="color:#93C5FD;">from</span> <span style="color:#86EFAC;">'next/font/local'</span><br><br>
+        <span style="color:#93C5FD;">const</span> helotypo = localFont({<br>
+        &nbsp;&nbsp;src: [<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;{ path: <span style="color:#86EFAC;">'../public/fonts/helotypo/Helotypo-Light.woff2'</span>, weight: <span style="color:#86EFAC;">'300'</span> },<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;{ path: <span style="color:#86EFAC;">'../public/fonts/helotypo/Helotypo-Regular.woff2'</span>, weight: <span style="color:#86EFAC;">'400'</span> },<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;{ path: <span style="color:#86EFAC;">'../public/fonts/helotypo/Helotypo-Bold.woff2'</span>, weight: <span style="color:#86EFAC;">'700'</span> },<br>
+        &nbsp;&nbsp;],<br>
+        &nbsp;&nbsp;variable: <span style="color:#86EFAC;">'--font-helotypo'</span><br>
+        })
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Recommendation:</strong> If you have Envato Elements, download Helotypo now — it's a 2-min setup with <code>next/font/local</code> and you get the exact font. Otherwise, <strong>Plus Jakarta Sans 700–800</strong> is the closest free alternative at ~88% match. We can use PJS for now and swap in Helotypo once you download it — they're virtually interchangeable in the CSS variable.
+  </div>
+
+</div>
+
+<p style="text-align:center;margin-top:28px;font-size:0.6rem;color:rgba(26,26,26,0.25);letter-spacing:0.08em;">
+  Do you have Helotypo downloaded from Envato? — or go with Plus Jakarta Sans?
+</p>
+
+</body>
+</html>

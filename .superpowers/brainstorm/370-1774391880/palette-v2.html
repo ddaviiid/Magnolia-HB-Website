@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnolia — Palette v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    color: #f0ebe0;
+    font-family: 'Helvetica Neue', sans-serif;
+    padding: 40px 24px 60px;
+    min-height: 100vh;
+  }
+  .header { text-align: center; margin-bottom: 10px; }
+  .header h1 { font-family: 'Georgia', serif; font-style: italic; font-weight: 400; font-size: 1.8rem; color: #f0ebe0; }
+  .question-label { text-align: center; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,235,224,0.35); margin-bottom: 36px; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+  @media(max-width:640px){ .cards { grid-template-columns: 1fr; } }
+
+  .card { border-radius: 4px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s, transform 0.2s; }
+  .card:hover { transform: translateY(-3px); }
+  .card.selected { border-color: #C9A84C; }
+  .selected-badge { display: none; position: absolute; top: 10px; left: 10px; background: #C9A84C; color: #111; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; z-index: 10; }
+  .card.selected .selected-badge { display: block; }
+
+  .preview { height: 360px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 22px; overflow: hidden; }
+
+  /* OPTION 1 — Charcoal + Cream sections (50/50 rhythm) */
+  .p1 .preview { background: linear-gradient(155deg, #141414 0%, #1C1C1C 60%, #141414 100%); }
+  /* OPTION 2 — Espresso + Cream (warm) */
+  .p2 .preview { background: linear-gradient(155deg, #12100D 0%, #1C180F 60%, #12100D 100%); }
+  /* OPTION 3 — Cream dominant (light, green accent) */
+  .p3 .preview { background: #F7F2E8; justify-content: flex-start; padding-top: 16px; }
+  /* OPTION 4 — Neutral parchment + charcoal (magazine editorial) */
+  .p4 .preview { background: #EDE8DC; justify-content: flex-start; padding-top: 16px; }
+
+  .mock-nav {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 40px; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 18px;
+  }
+  .mock-nav-logo { font-family: 'Georgia', serif; font-style: italic; font-weight: 600; font-size: 0.75rem; }
+  .mock-nav-cta { border: 1px solid; padding: 3px 10px; border-radius: 2px; font-size: 0.5rem; letter-spacing: 0.1em; }
+
+  /* Nav dark versions */
+  .p1 .mock-nav, .p2 .mock-nav { background: transparent; }
+  .p1 .mock-nav-logo, .p2 .mock-nav-logo { color: #F2EDE4; }
+  .p1 .mock-nav-cta, .p2 .mock-nav-cta { color: #C9A84C; border-color: rgba(201,168,76,0.4); }
+
+  /* Nav light versions */
+  .p3 .mock-nav, .p4 .mock-nav { background: transparent; }
+  .p3 .mock-nav-logo { color: #1A1A1A; }
+  .p3 .mock-nav-cta { color: #1A5C35; border-color: rgba(26,92,53,0.4); }
+  .p4 .mock-nav-logo { color: #1A1A1A; }
+  .p4 .mock-nav-cta { color: #9A7B3A; border-color: rgba(154,123,58,0.4); }
+
+  .preview-content { position: relative; z-index: 2; }
+  .eyebrow { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+  .h1-main { font-family: 'Georgia', serif; font-style: italic; font-weight: 600; font-size: 2rem; display: block; line-height: 0.9; }
+  .h1-outline { font-family: 'Georgia', serif; font-style: italic; font-weight: 600; font-size: 2.9rem; display: block; line-height: 0.9; letter-spacing: -0.02em; }
+  .h1-end { font-family: 'Georgia', serif; font-style: italic; font-weight: 600; font-size: 1.7rem; display: block; line-height: 1; }
+  .sub { font-size: 0.62rem; line-height: 1.6; margin: 10px 0 14px; }
+  .btn { display: inline-block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 8px 16px; border-radius: 2px; }
+
+  /* Dark theme colors */
+  .p1 .eyebrow { color: #C9A84C; }
+  .p1 .h1-main, .p1 .h1-end { color: #F2EDE4; }
+  .p1 .h1-outline { color: transparent; -webkit-text-stroke: 1.5px #C9A84C; }
+  .p1 .sub { color: rgba(242,237,228,0.42); }
+  .p1 .btn { background: #C9A84C; color: #141414; }
+
+  .p2 .eyebrow { color: #C9A84C; }
+  .p2 .h1-main, .p2 .h1-end { color: #F5EFE2; }
+  .p2 .h1-outline { color: transparent; -webkit-text-stroke: 1.5px #C9A84C; }
+  .p2 .sub { color: rgba(245,239,226,0.42); }
+  .p2 .btn { background: #C9A84C; color: #12100D; }
+
+  /* Light theme colors */
+  .p3 .eyebrow { color: #1A5C35; }
+  .p3 .h1-main, .p3 .h1-end { color: #1A1A1A; }
+  .p3 .h1-outline { color: transparent; -webkit-text-stroke: 1.5px #1A5C35; }
+  .p3 .sub { color: rgba(26,26,26,0.48); }
+  .p3 .btn { background: #1A1A1A; color: #F7F2E8; }
+
+  .p4 .eyebrow { color: #9A7B3A; }
+  .p4 .h1-main, .p4 .h1-end { color: #1A1A1A; }
+  .p4 .h1-outline { color: transparent; -webkit-text-stroke: 1.5px #9A7B3A; }
+  .p4 .sub { color: rgba(26,26,26,0.48); }
+  .p4 .btn { background: #1A1A1A; color: #EDE8DC; }
+
+  /* Section preview strip */
+  .section-strip { height: 52px; display: flex; align-items: center; padding: 0 18px; gap: 12px; }
+  .strip-num { font-family: 'Georgia', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; opacity: 0.22; }
+  .strip-text { font-family: 'Georgia', serif; font-style: italic; font-size: 0.72rem; }
+
+  /* Strip colors */
+  .p1-strip { background: #F2EDE4; color: #1A1A1A; }
+  .p2-strip { background: #F5EFE2; color: #12100D; }
+  .p3-strip { background: #1A1A1A; color: #F7F2E8; }
+  .p4-strip { background: #1A1A1A; color: #EDE8DC; }
+
+  .card-label { padding: 16px 18px; background: #1a1a1a; }
+  .card-label h3 { font-family: 'Georgia', serif; font-style: italic; font-size: 0.95rem; font-weight: 400; margin-bottom: 4px; color: #f0ebe0; }
+  .card-label p { font-size: 0.68rem; color: rgba(240,235,224,0.42); line-height: 1.55; }
+  .swatch-row { display: flex; gap: 5px; margin-top: 10px; align-items: center; }
+  .swatch { width: 18px; height: 18px; border-radius: 3px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.08); }
+  .swatch-label { font-size: 0.52rem; color: rgba(240,235,224,0.28); margin-left: 4px; }
+</style>
+<script>
+  function select(el) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const choice = el.dataset.choice;
+    const label = el.querySelector('h3').textContent;
+    try { fetch('/__select', { method:'POST', body: JSON.stringify({ choice, label }) }).catch(()=>{}) } catch(e) {}
+  }
+</script>
+</head>
+<body>
+
+<div class="header"><h1>Palette Options — All Editorial Style</h1></div>
+<p class="question-label">Top row: dark dominant · Bottom row: light dominant · Which base feels right?</p>
+
+<div class="cards">
+
+  <!-- P1: Charcoal + Cream rhythm -->
+  <div class="card p1" data-choice="p1" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="preview p1">
+        <div class="mock-nav p1"><span class="mock-nav-logo p1">Magnolia</span><span class="mock-nav-cta p1">Get Offer</span></div>
+        <div class="preview-content">
+          <span class="eyebrow p1">Nationwide Cash Buyers</span>
+          <span class="h1-main p1">We Buy Your</span>
+          <span class="h1-outline p1">Home.</span>
+          <span class="h1-end p1">Fast. Cash.</span>
+          <p class="sub p1">Fair offer in 24 hours. No repairs. No fees.</p>
+          <span class="btn p1">Get My Cash Offer</span>
+        </div>
+      </div>
+      <div class="section-strip p1-strip">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+        <span style="margin-left:auto;font-size:0.65rem;color:#C9A84C">→</span>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Dark Charcoal + Cream Sections</h3>
+      <p>Near-black hero + alternating cream sections. Neutral, modern, least green. Editorial rhythm of dark ↔ cream throughout the page.</p>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#141414"></div>
+        <div class="swatch" style="background:#F2EDE4"></div>
+        <div class="swatch" style="background:#C9A84C"></div>
+        <div class="swatch" style="background:#1C1C1C"></div>
+        <span class="swatch-label">Charcoal · Warm Cream · Gold</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Espresso + Ivory -->
+  <div class="card p2" data-choice="p2" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="preview p2">
+        <div class="mock-nav p2"><span class="mock-nav-logo p2">Magnolia</span><span class="mock-nav-cta p2">Get Offer</span></div>
+        <div class="preview-content">
+          <span class="eyebrow p2">Nationwide Cash Buyers</span>
+          <span class="h1-main p2">We Buy Your</span>
+          <span class="h1-outline p2">Home.</span>
+          <span class="h1-end p2">Fast. Cash.</span>
+          <p class="sub p2">Fair offer in 24 hours. No repairs. No fees.</p>
+          <span class="btn p2">Get My Cash Offer</span>
+        </div>
+      </div>
+      <div class="section-strip p2-strip">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+        <span style="margin-left:auto;font-size:0.65rem;color:#C9A84C">→</span>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Warm Espresso + Ivory Sections</h3>
+      <p>Dark brown-black hero + ivory/parchment sections. Zero green, fully warm. Gold accents pop the hardest on this base. Timeless, trustworthy.</p>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#12100D"></div>
+        <div class="swatch" style="background:#F5EFE2"></div>
+        <div class="swatch" style="background:#C9A84C"></div>
+        <div class="swatch" style="background:#1C180F"></div>
+        <span class="swatch-label">Espresso · Ivory · Gold</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Cream dominant + green accent -->
+  <div class="card p3" data-choice="p3" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="preview p3">
+        <div class="mock-nav p3"><span class="mock-nav-logo p3">Magnolia</span><span class="mock-nav-cta p3">Get Offer</span></div>
+        <div class="preview-content" style="margin-top:32px">
+          <span class="eyebrow p3">Nationwide Cash Buyers</span>
+          <span class="h1-main p3">We Buy Your</span>
+          <span class="h1-outline p3">Home.</span>
+          <span class="h1-end p3">Fast. Cash.</span>
+          <p class="sub p3">Fair offer in 24 hours. No repairs. No fees.</p>
+          <span class="btn p3">Get My Cash Offer</span>
+        </div>
+      </div>
+      <div class="section-strip p3-strip">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+        <span style="margin-left:auto;font-size:0.65rem;color:#C9A84C">→</span>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Cream Dominant + Forest Green Accent</h3>
+      <p>Light/cream hero, dark charcoal sections for contrast. Green used only as an accent colour, not a background. Fresh, trustworthy, modern.</p>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#F7F2E8"></div>
+        <div class="swatch" style="background:#1A1A1A"></div>
+        <div class="swatch" style="background:#1A5C35"></div>
+        <div class="swatch" style="background:#C9A84C"></div>
+        <span class="swatch-label">Cream · Charcoal · Sage · Gold</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Parchment + bronze (no green at all) -->
+  <div class="card p4" data-choice="p4" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="preview p4">
+        <div class="mock-nav p4"><span class="mock-nav-logo p4">Magnolia</span><span class="mock-nav-cta p4">Get Offer</span></div>
+        <div class="preview-content" style="margin-top:32px">
+          <span class="eyebrow p4">Nationwide Cash Buyers</span>
+          <span class="h1-main p4">We Buy Your</span>
+          <span class="h1-outline p4">Home.</span>
+          <span class="h1-end p4">Fast. Cash.</span>
+          <p class="sub p4">Fair offer in 24 hours. No repairs. No fees.</p>
+          <span class="btn p4">Get My Cash Offer</span>
+        </div>
+      </div>
+      <div class="section-strip p4-strip">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+        <span style="margin-left:auto;font-size:0.65rem;color:#9A7B3A">→</span>
+      </div>
+    </div>
+    <div class="card-label">
+      <h3>Parchment + Charcoal (No Green)</h3>
+      <p>Warm parchment hero, near-black sections. No green anywhere — just parchment, charcoal, and bronze-gold. The most classic, neutral editorial look.</p>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#EDE8DC"></div>
+        <div class="swatch" style="background:#1A1A1A"></div>
+        <div class="swatch" style="background:#9A7B3A"></div>
+        <div class="swatch" style="background:#2A2520"></div>
+        <span class="swatch-label">Parchment · Charcoal · Bronze</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:28px; font-size:0.65rem; color:rgba(240,235,224,0.22); letter-spacing:0.06em;">
+  Cormorant Garamond italic · Film grain · Same editorial layout · Click to select
+</p>
+
+</body>
+</html>

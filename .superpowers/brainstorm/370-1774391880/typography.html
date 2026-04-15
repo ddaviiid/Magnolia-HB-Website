@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnolia — Typography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,600;0,700;1,100;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Outfit:wght@200;300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    color: #f0ebe0;
+    font-family: 'DM Sans', sans-serif;
+    padding: 36px 20px 60px;
+  }
+  .header { text-align: center; margin-bottom: 10px; }
+  .header h1 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; color: #f0ebe0; }
+  .question-label { text-align: center; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,235,224,0.3); margin-bottom: 30px; font-family: 'DM Sans', sans-serif; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; }
+  @media(max-width:700px){ .grid { grid-template-columns: 1fr; } }
+
+  .card { border-radius: 4px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s, transform 0.15s; }
+  .card:hover { transform: translateY(-3px); }
+  .card.selected { border-color: #C9A84C; }
+  .selected-badge { display: none; position: absolute; top: 10px; left: 10px; background: #C9A84C; color: #111; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; z-index: 10; }
+  .card.selected .selected-badge { display: block; }
+
+  /* Shared hero mockup */
+  .hero {
+    background: linear-gradient(155deg, #141414 0%, #1C1C1C 60%, #141414 100%);
+    padding: 22px 22px 26px;
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .mock-nav {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 38px; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 18px;
+  }
+  .mock-nav-cta {
+    border: 1px solid rgba(201,168,76,0.45);
+    color: #C9A84C; padding: 3px 10px; border-radius: 2px;
+    font-size: 0.5rem; letter-spacing: 0.1em;
+  }
+  .eyebrow-base {
+    font-size: 0.52rem; font-weight: 600; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #C9A84C; display: block; margin-bottom: 10px;
+  }
+  .cta-btn {
+    display: inline-block; background: #C9A84C; color: #141414;
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; padding: 9px 18px; border-radius: 2px; margin-top: 14px;
+  }
+  .sub-text { font-size: 0.65rem; line-height: 1.65; color: rgba(242,237,228,0.42); margin-top: 8px; }
+
+  /* Cream strip preview */
+  .strip {
+    background: #F2EDE4;
+    padding: 16px 22px;
+    display: flex; align-items: baseline; gap: 14px;
+  }
+
+  /* OPTION A — Syne (display) + DM Sans (body) */
+  .nav-a .mock-nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: -0.02em; color: #F2EDE4; }
+  .nav-a .eyebrow { font-family: 'DM Sans', sans-serif; }
+  .h1-a { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem; line-height: 0.88; letter-spacing: -0.03em; color: #F2EDE4; }
+  .h1-a .outline { color: transparent; -webkit-text-stroke: 1.5px #C9A84C; }
+  .sub-a { font-family: 'DM Sans', sans-serif; font-weight: 300; }
+  .strip-a .strip-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.03em; color: #C9A84C; opacity: 0.5; }
+  .strip-a .strip-text { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: #1A1A1A; }
+  .cta-a { font-family: 'DM Sans', sans-serif; }
+
+  /* OPTION B — Josefin Sans (display) + Outfit (body) */
+  .nav-b .mock-nav-logo { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: #F2EDE4; }
+  .h1-b { font-family: 'Josefin Sans', sans-serif; font-weight: 100; font-size: 3.4rem; line-height: 0.9; letter-spacing: 0.02em; color: #F2EDE4; text-transform: uppercase; }
+  .h1-b .outline { color: transparent; -webkit-text-stroke: 1px #C9A84C; }
+  .h1-b .bold-line { font-weight: 700; letter-spacing: 0.06em; }
+  .sub-b { font-family: 'Outfit', sans-serif; font-weight: 300; }
+  .strip-b .strip-num { font-family: 'Josefin Sans', sans-serif; font-weight: 100; font-size: 1.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: #C9A84C; opacity: 0.45; }
+  .strip-b .strip-text { font-family: 'Outfit', sans-serif; font-size: 0.78rem; color: #1A1A1A; font-weight: 300; }
+  .cta-b { font-family: 'Josefin Sans', sans-serif; font-weight: 700; letter-spacing: 0.18em !important; }
+
+  /* OPTION C — Barlow Condensed (display) + Plus Jakarta Sans (body) */
+  .nav-c .mock-nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; text-transform: uppercase; color: #F2EDE4; }
+  .h1-c { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 4rem; line-height: 0.85; letter-spacing: -0.01em; color: #F2EDE4; text-transform: uppercase; }
+  .h1-c .outline { color: transparent; -webkit-text-stroke: 2px #C9A84C; }
+  .h1-c .italic { font-style: italic; font-weight: 400; font-size: 3.2rem; }
+  .sub-c { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; }
+  .strip-c .strip-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.8rem; letter-spacing: -0.01em; text-transform: uppercase; color: #C9A84C; opacity: 0.45; }
+  .strip-c .strip-text { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; color: #1A1A1A; font-weight: 400; }
+  .cta-c { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+  /* OPTION D — Fraunces (optical display) + Syne (body) */
+  .nav-d .mock-nav-logo { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 0.9rem; color: #F2EDE4; }
+  .h1-d { font-family: 'Fraunces', serif; font-weight: 300; font-size: 3.2rem; line-height: 0.88; letter-spacing: -0.02em; color: #F2EDE4; }
+  .h1-d .outline { color: transparent; -webkit-text-stroke: 1px #C9A84C; font-weight: 700; }
+  .h1-d .bold { font-weight: 700; font-style: italic; color: #C9A84C; }
+  .sub-d { font-family: 'Syne', sans-serif; font-weight: 400; letter-spacing: 0.02em; }
+  .strip-d .strip-num { font-family: 'Fraunces', serif; font-weight: 700; font-style: italic; font-size: 1.5rem; color: #C9A84C; opacity: 0.5; }
+  .strip-d .strip-text { font-family: 'Syne', sans-serif; font-size: 0.72rem; color: #1A1A1A; font-weight: 500; letter-spacing: 0.03em; }
+  .cta-d { font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  .label { padding: 14px 18px; background: #1a1a1a; }
+  .label h3 { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.82rem; letter-spacing: -0.01em; color: #f0ebe0; margin-bottom: 3px; }
+  .label .pair { font-size: 0.65rem; color: #C9A84C; margin-bottom: 4px; letter-spacing: 0.04em; }
+  .label p { font-size: 0.67rem; color: rgba(240,235,224,0.4); line-height: 1.5; }
+</style>
+<script>
+  function select(el) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const choice = el.dataset.choice;
+    const label = el.querySelector('h3').textContent;
+    try { fetch('/__select', { method:'POST', body: JSON.stringify({ choice, label }) }).catch(()=>{}) } catch(e) {}
+  }
+</script>
+</head>
+<body>
+
+<div class="header"><h1>Typography Direction</h1></div>
+<p class="question-label">All on charcoal + cream palette · Real Google Fonts · Click to select</p>
+
+<div class="grid">
+
+  <!-- A: Syne + DM Sans -->
+  <div class="card" data-choice="a" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="hero">
+        <div class="mock-nav nav-a">
+          <span class="mock-nav-logo nav-a">MAGNOLIA</span>
+          <span class="mock-nav-cta">Get Offer</span>
+        </div>
+        <span class="eyebrow-base nav-a">Nationwide Cash Home Buyers</span>
+        <div class="h1-a">
+          <span style="display:block">We Buy Your</span>
+          <span style="display:block" class="outline">Home.</span>
+          <span style="display:block">Fast. Cash.</span>
+        </div>
+        <p class="sub-text sub-a">Fair cash offer in 24 hours. No repairs, no fees.</p>
+        <span class="cta-btn cta-a">Get My Cash Offer</span>
+      </div>
+      <div class="strip strip-a">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="label">
+      <h3>A — Syne + DM Sans</h3>
+      <div class="pair">Display: Syne 800 · Body: DM Sans 300</div>
+      <p>Ultra-geometric, Swiss editorial. Heavy and mechanical on headlines, airy on body. The most "futuristic design studio" feel.</p>
+    </div>
+  </div>
+
+  <!-- B: Josefin Sans + Outfit -->
+  <div class="card" data-choice="b" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="hero">
+        <div class="mock-nav nav-b">
+          <span class="mock-nav-logo nav-b">Magnolia</span>
+          <span class="mock-nav-cta">Get Offer</span>
+        </div>
+        <span class="eyebrow-base nav-b">Nationwide Cash Home Buyers</span>
+        <div class="h1-b">
+          <span style="display:block">We Buy Your</span>
+          <span style="display:block" class="outline">Home.</span>
+          <span style="display:block" class="bold-line">Fast. Cash.</span>
+        </div>
+        <p class="sub-text sub-b">Fair cash offer in 24 hours. No repairs, no fees.</p>
+        <span class="cta-btn cta-b">Get My Cash Offer</span>
+      </div>
+      <div class="strip strip-b">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="label">
+      <h3>B — Josefin Sans + Outfit</h3>
+      <div class="pair">Display: Josefin Sans 100–700 · Body: Outfit 300</div>
+      <p>Ultra-thin uppercase on hero, bold weight on CTA. Art deco + Bauhaus elegance. Very distinctive, unlike any real estate site.</p>
+    </div>
+  </div>
+
+  <!-- C: Barlow Condensed + Plus Jakarta Sans -->
+  <div class="card" data-choice="c" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="hero">
+        <div class="mock-nav nav-c">
+          <span class="mock-nav-logo nav-c">Magnolia</span>
+          <span class="mock-nav-cta">Get Offer</span>
+        </div>
+        <span class="eyebrow-base nav-c">Nationwide Cash Home Buyers</span>
+        <div class="h1-c">
+          <span style="display:block">We Buy Your</span>
+          <span style="display:block" class="outline">Home.</span>
+          <span style="display:block" class="italic">Fast. Cash.</span>
+        </div>
+        <p class="sub-text sub-c">Fair cash offer in 24 hours. No repairs, no fees.</p>
+        <span class="cta-btn cta-c">Get My Cash Offer</span>
+      </div>
+      <div class="strip strip-c">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="label">
+      <h3>C — Barlow Condensed + Plus Jakarta Sans</h3>
+      <div class="pair">Display: Barlow Condensed 700 · Body: Plus Jakarta Sans 300</div>
+      <p>Tall, tight, impactful. The condensed display font creates incredible vertical energy. Bold and assertive — reads fast.</p>
+    </div>
+  </div>
+
+  <!-- D: Fraunces + Syne -->
+  <div class="card" data-choice="d" onclick="select(this)">
+    <div style="position:relative">
+      <span class="selected-badge">Selected</span>
+      <div class="hero">
+        <div class="mock-nav nav-d">
+          <span class="mock-nav-logo nav-d">Magnolia</span>
+          <span class="mock-nav-cta">Get Offer</span>
+        </div>
+        <span class="eyebrow-base nav-d">Nationwide Cash Home Buyers</span>
+        <div class="h1-d">
+          <span style="display:block">We Buy Your</span>
+          <span style="display:block" class="outline">Home.</span>
+          <span style="display:block" class="bold">Fast. Cash.</span>
+        </div>
+        <p class="sub-text sub-d">Fair cash offer in 24 hours. No repairs, no fees.</p>
+        <span class="cta-btn cta-d">Get My Cash Offer</span>
+      </div>
+      <div class="strip strip-d">
+        <span class="strip-num">01.</span>
+        <span class="strip-text">Tell Us About Your Home</span>
+      </div>
+    </div>
+    <div class="label">
+      <h3>D — Fraunces + Syne</h3>
+      <div class="pair">Display: Fraunces optical 300–700 · Body: Syne 500</div>
+      <p>Optical serif that shifts character at different sizes (wobbly, alive), paired with geometric Syne body. Elegant but unexpected — premium and distinctive.</p>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:24px; font-size:0.62rem; color:rgba(240,235,224,0.2); letter-spacing:0.06em; font-family:'DM Sans',sans-serif;">
+  Charcoal #141414 · Cream #F2EDE4 · Gold #C9A84C · Click a card to select
+</p>
+
+</body>
+</html>
