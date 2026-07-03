@@ -9,6 +9,7 @@ export default function CTASection() {
       style={{
         background: 'var(--bg-dark)',
         paddingTop: 'var(--section-gap)',
+        paddingBottom: 'clamp(56px, 8vw, 96px)',
       }}
       id="contact"
     >
@@ -22,7 +23,6 @@ export default function CTASection() {
           margin: '0 auto',
           padding: '0 clamp(24px, 6vw, 80px)',
           textAlign: 'center',
-          marginBottom: 'clamp(40px, 6vw, 72px)',
         }}
       >
         <span className="eyebrow">Free · No Obligation · No Pressure</span>
