@@ -44,6 +44,7 @@ export default function AboutPage() {
     <main style={{ background: 'var(--bg-dark)', paddingTop: 72 }}>
       {/* Hero */}
       <section
+        data-nav-theme="dark"
         style={{
           background: 'var(--bg-dark)',
           padding: 'clamp(80px, 12vw, 140px) clamp(24px, 6vw, 80px) clamp(64px, 8vw, 96px)',
@@ -104,6 +105,7 @@ export default function AboutPage() {
 
       {/* Story section */}
       <section
+        data-nav-theme="dark"
         style={{
           background: 'var(--bg-dark)',
           padding: '0 clamp(24px, 6vw, 80px) var(--section-gap)',
@@ -226,6 +228,7 @@ export default function AboutPage() {
 
       {/* Mission pull-quote — cream */}
       <section
+        data-nav-theme="light"
         style={{
           background: 'var(--bg-cream)',
           padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
@@ -265,6 +268,7 @@ export default function AboutPage() {
 
       {/* Values */}
       <section
+        data-nav-theme="dark"
         style={{
           background: 'var(--bg-dark)',
           padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
@@ -335,6 +339,7 @@ export default function AboutPage() {
 
       {/* CTA strip */}
       <section
+        data-nav-theme="dark"
         style={{
           background: 'var(--bg-dark)',
           padding: 'clamp(64px, 8vw, 96px) clamp(24px, 6vw, 80px)',
