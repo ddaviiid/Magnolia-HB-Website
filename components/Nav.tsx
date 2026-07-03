@@ -105,19 +105,13 @@ export default function Nav() {
           transition: 'color 0.25s ease',
         }}
       >
-        <a href="#how-it-works" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = textColor)}
-          onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}>
+        <a href="#how-it-works" className="nav-link">
           How It Works
         </a>
-        <a href="#why-magnolia" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = textColor)}
-          onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}>
+        <a href="#why-magnolia" className="nav-link">
           Why Us
         </a>
-        <a href="#faq" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = textColor)}
-          onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}>
+        <a href="#faq" className="nav-link">
           FAQ
         </a>
         <a
@@ -140,6 +134,15 @@ export default function Nav() {
       </div>
 
       <style>{`
+        .nav-link {
+          color: inherit;
+          text-decoration: none;
+          opacity: 1;
+          transition: opacity 0.2s;
+        }
+        .nav-link:hover {
+          opacity: 0.65;
+        }
         @media (max-width: 640px) {
           .nav-links a:not(:last-child) { display: none; }
         }
