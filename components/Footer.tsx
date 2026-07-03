@@ -5,6 +5,7 @@ export default function Footer() {
 
   return (
     <footer
+      data-nav-theme="dark"
       style={{
         background: 'var(--bg-footer)',
         borderTop: '1px solid rgba(248,244,238,0.06)',

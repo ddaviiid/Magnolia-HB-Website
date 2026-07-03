@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 
 export default function Nav() {
   const [hidden, setHidden] = useState(true)
+  // Tone of whatever section is currently scrolled behind the nav.
+  // 'dark' = dark background → nav renders light text.
+  // 'light' = light background → nav renders dark text.
+  const [tone, setTone] = useState<'dark' | 'light'>('dark')
 
   useEffect(() => {
     const onScroll = () => {
@@ -19,6 +23,39 @@ export default function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    const navHeight = 76
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-theme]'))
+    if (sections.length === 0) return
+
+    // Create a thin observation band right at the bottom edge of the nav.
+    // Whichever section is crossing that line is what's actually behind
+    // the nav bar, so we adopt its declared tone.
+    const bottomMargin = Math.max(window.innerHeight - navHeight - 1, 0)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const value = entry.target.getAttribute('data-nav-theme')
+            if (value === 'dark' || value === 'light') {
+              setTone(value)
+            }
+          }
+        })
+      },
+      {
+        rootMargin: `-${navHeight}px 0px -${bottomMargin}px 0px`,
+        threshold: 0,
+      }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  const textColor = tone === 'light' ? 'var(--text-dark)' : 'var(--text-light)'
+  const mutedColor = tone === 'light' ? 'var(--text-dark-muted)' : 'var(--text-muted)'
 
   return (
     <nav
@@ -38,7 +75,7 @@ export default function Nav() {
         WebkitBackdropFilter: 'blur(14px)',
         borderBottom: '1px solid transparent',
         transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
-        transition: 'transform 0.35s ease',
+        transition: 'transform 0.35s ease, color 0.25s ease',
       }}
     >
       {/* Logo */}
@@ -47,7 +84,8 @@ export default function Nav() {
           fontFamily: 'var(--font-display)',
           fontWeight: 700,
           fontSize: '1.25rem',
-          color: 'var(--text-light)',
+          color: textColor,
+          transition: 'color 0.25s ease',
         }}
       >
         Magnolia
@@ -63,22 +101,23 @@ export default function Nav() {
           fontFamily: 'var(--font-body)',
           fontSize: '0.92rem',
           fontWeight: 500,
-          color: 'var(--text-muted)',
+          color: mutedColor,
+          transition: 'color 0.25s ease',
         }}
       >
         <a href="#how-it-works" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-light)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
+          onMouseEnter={e => (e.currentTarget.style.color = textColor)}
+          onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}>
           How It Works
         </a>
         <a href="#why-magnolia" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-light)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
+          onMouseEnter={e => (e.currentTarget.style.color = textColor)}
+          onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}>
           Why Us
         </a>
         <a href="#faq" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-light)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
+          onMouseEnter={e => (e.currentTarget.style.color = textColor)}
+          onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}>
           FAQ
         </a>
         <a

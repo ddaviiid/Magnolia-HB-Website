@@ -137,6 +137,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
+      data-nav-theme="dark"
       style={{
         background: 'var(--bg-dark)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',

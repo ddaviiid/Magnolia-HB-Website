@@ -6,6 +6,7 @@ import LeadForm from './LeadForm'
 export default function CTASection() {
   return (
     <section
+      data-nav-theme="light"
       style={{
         background: 'var(--bg-cream)',
         paddingTop: 'var(--section-gap)',

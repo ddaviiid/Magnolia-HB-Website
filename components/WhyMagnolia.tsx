@@ -130,6 +130,7 @@ export default function WhyMagnolia() {
   return (
     <section
       id="why-magnolia"
+      data-nav-theme="dark"
       style={{
         background: 'var(--bg-dark)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',

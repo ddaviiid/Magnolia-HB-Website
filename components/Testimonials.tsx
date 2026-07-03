@@ -61,6 +61,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
+      data-nav-theme="light"
       style={{
         background: 'var(--bg-cream)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',

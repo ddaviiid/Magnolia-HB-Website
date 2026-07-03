@@ -90,6 +90,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
+      data-nav-theme="light"
       style={{
         background: 'var(--bg-cream)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',

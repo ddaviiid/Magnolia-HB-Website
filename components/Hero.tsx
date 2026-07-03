@@ -28,6 +28,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
+      data-nav-theme="dark"
       style={{
         minHeight: '100vh',
         background: 'var(--bg-dark)',
