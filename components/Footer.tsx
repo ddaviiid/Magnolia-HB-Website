@@ -142,35 +142,18 @@ export default function Footer() {
           margin: '32px auto 0',
           paddingTop: 24,
           borderTop: '1px solid rgba(248,244,238,0.05)',
-          display: 'grid',
-          gridTemplateColumns: '1fr auto 1fr',
-          alignItems: 'center',
-          gap: 12,
+          textAlign: 'center',
         }}
         className="footer-bottom"
       >
-        <span aria-hidden="true" />
         <p
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: '14.52px',
             color: 'var(--text-light)',
-            textAlign: 'center',
-            whiteSpace: 'nowrap',
           }}
         >
           © {year} Magnolia Home Buyers LLC. All rights reserved.
-        </p>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '14.52px',
-            color: 'var(--text-light)',
-            textAlign: 'right',
-            justifySelf: 'end',
-          }}
-        >
-          We are not real estate agents · Cash offers only
         </p>
       </div>
 
@@ -178,9 +161,6 @@ export default function Footer() {
         @media (max-width: 640px) {
           .footer-grid { grid-template-columns: 1fr !important; }
           .footer-links { justify-content: flex-start !important; gap: 32px !important; }
-          .footer-bottom { grid-template-columns: 1fr !important; text-align: center; }
-          .footer-bottom span { display: none; }
-          .footer-bottom p { text-align: center !important; justify-self: center !important; white-space: normal !important; }
         }
       `}</style>
     </footer>
