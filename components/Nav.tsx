@@ -1,36 +1,19 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(true)
-  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const onScroll = () => {
-      const currentY = window.scrollY
-
-      setScrolled(currentY > 40)
-
-      if (currentY <= 0) {
-        // At the very top / page just loaded — nav stays hidden
-        setHidden(true)
-      } else if (lastScrollY.current <= 0) {
-        // Just started scrolling away from the top — reveal the nav
+      // Hidden at the very top / on load. Once scrolling starts, reveal
+      // the nav and keep it fixed in place — no more hiding on scroll.
+      if (window.scrollY > 0) {
         setHidden(false)
       } else {
-        const delta = currentY - lastScrollY.current
-        if (delta > 5) {
-          // Scrolling down — hide the nav
-          setHidden(true)
-        } else if (delta < -5) {
-          // Scrolling up — reveal the nav
-          setHidden(false)
-        }
+        setHidden(true)
       }
-
-      lastScrollY.current = currentY
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -50,11 +33,12 @@ export default function Nav() {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 clamp(20px, 5vw, 64px)',
-        background: scrolled ? 'rgba(17,17,17,0.92)' : 'rgba(10,10,10,0.75)',
-        backdropFilter: 'blur(16px)',
-        borderBottom: scrolled ? '1px solid rgba(248,244,238,0.06)' : '1px solid transparent',
+        background: 'transparent',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        borderBottom: '1px solid transparent',
         transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
-        transition: 'background 0.3s, backdrop-filter 0.3s, border-color 0.3s, transform 0.35s ease',
+        transition: 'transform 0.35s ease',
       }}
     >
       {/* Logo */}
