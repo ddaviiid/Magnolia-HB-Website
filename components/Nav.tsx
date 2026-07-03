@@ -13,29 +13,52 @@ export default function Nav() {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-theme]'))
     if (sections.length === 0) return
 
+    let observer: IntersectionObserver | null = null
+
     // Create a thin observation band right at the bottom edge of the nav.
     // Whichever section is crossing that line is what's actually behind
-    // the nav bar, so we adopt its declared tone.
-    const bottomMargin = Math.max(window.innerHeight - navHeight - 1, 0)
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const value = entry.target.getAttribute('data-nav-theme')
-            if (value === 'dark' || value === 'light') {
-              setTone(value)
+    // the nav bar, so we adopt its declared tone. Rebuilt whenever the
+    // viewport size changes (mobile browsers resize innerHeight when the
+    // address bar collapses/expands, orientation changes, etc.) so the
+    // band never goes stale.
+    const buildObserver = () => {
+      observer?.disconnect()
+      const bottomMargin = Math.max(window.innerHeight - navHeight - 1, 0)
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const value = entry.target.getAttribute('data-nav-theme')
+              if (value === 'dark' || value === 'light') {
+                setTone(value)
+              }
             }
-          }
-        })
-      },
-      {
-        rootMargin: `-${navHeight}px 0px -${bottomMargin}px 0px`,
-        threshold: 0,
-      }
-    )
+          })
+        },
+        {
+          rootMargin: `-${navHeight}px 0px -${bottomMargin}px 0px`,
+          threshold: 0,
+        }
+      )
+      sections.forEach((section) => observer!.observe(section))
+    }
 
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
+    buildObserver()
+
+    let resizeTimer: ReturnType<typeof setTimeout>
+    const onResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(buildObserver, 150)
+    }
+    window.addEventListener('resize', onResize)
+    window.addEventListener('orientationchange', onResize)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      window.removeEventListener('orientationchange', onResize)
+      clearTimeout(resizeTimer)
+      observer?.disconnect()
+    }
   }, [])
 
   const textColor = tone === 'light' ? 'var(--text-dark)' : 'var(--text-light)'
