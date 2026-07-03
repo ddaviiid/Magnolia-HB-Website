@@ -45,7 +45,7 @@ export default function Footer() {
               maxWidth: 300,
             }}
           >
-            We buy houses across the USA for cash — any condition, any situation, any timeline.
+            We buy houses across Louisiana for cash — any condition, any situation, any timeline.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export default function Footer() {
               Contact
             </div>
             <a
-              href="tel:+18880000000"
+              href="tel:+15046085802"
               style={{
                 display: 'block',
                 fontFamily: 'var(--font-body)',
@@ -114,7 +114,7 @@ export default function Footer() {
               onMouseEnter={e => (e.currentTarget.style.color = 'var(--blue-light)')}
               onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
             >
-              (888) 000-0000
+              (504) 608-5802
             </a>
             <a
               href="mailto:info@magnoliahomebuyers.com"

@@ -95,7 +95,7 @@ export default function Hero() {
           animate="show"
           variants={fadeUp}
         >
-          Nationwide Cash Home Buyers
+          Louisiana Cash Home Buyers
         </motion.span>
 
         <motion.h1
@@ -136,7 +136,7 @@ export default function Hero() {
             maxWidth: 480,
           }}
         >
-          Fair offer in 24 hours. No repairs. No agent fees. Close in as few as 7 days.
+          Fair offer in 24 hours. No repairs. No agent fees. Close in as few as 7 days — anywhere in Louisiana.
         </motion.p>
 
         <motion.div
