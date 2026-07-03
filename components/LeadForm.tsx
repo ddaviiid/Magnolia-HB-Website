@@ -19,7 +19,7 @@ const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '14px 16px',
   background: '#ffffff',
-  border: '1px solid rgba(43,91,168,0.25)',
+  border: '1px solid rgba(38,111,80,0.25)',
   borderRadius: 2,
   color: 'var(--text-dark)',
   fontFamily: 'var(--font-body)',
@@ -75,7 +75,7 @@ export default function LeadForm() {
     e.currentTarget.style.borderColor = 'var(--blue)'
   }
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = 'rgba(43,91,168,0.25)'
+    e.currentTarget.style.borderColor = 'rgba(38,111,80,0.25)'
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -119,7 +119,7 @@ export default function LeadForm() {
         <div
           style={{
             background: '#ffffff',
-            border: '1px solid rgba(43,91,168,0.15)',
+            border: '1px solid rgba(38,111,80,0.15)',
             borderRadius: 4,
             padding: 'clamp(28px, 4vw, 48px)',
             boxShadow: '0 4px 32px rgba(17,17,17,0.06)',
@@ -132,7 +132,7 @@ export default function LeadForm() {
                   width: 64,
                   height: 64,
                   borderRadius: '50%',
-                  background: 'rgba(43,91,168,0.08)',
+                  background: 'rgba(38,111,80,0.08)',
                   border: '1px solid var(--blue-border-md)',
                   display: 'flex',
                   alignItems: 'center',
@@ -269,7 +269,7 @@ export default function LeadForm() {
                 style={{
                   width: '100%',
                   height: 54,
-                  background: status === 'loading' ? 'rgba(43,91,168,0.6)' : 'var(--blue)',
+                  background: status === 'loading' ? 'rgba(38,111,80,0.6)' : 'var(--blue)',
                   color: '#ffffff',
                   fontFamily: 'var(--font-body)',
                   fontWeight: 600,

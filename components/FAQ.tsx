@@ -69,7 +69,7 @@ function FAQItem({ faq, isOpen, onToggle, isLast, index }: {
           justifyContent: 'space-between',
           gap: 20,
           padding: 'clamp(16px, 2.5vw, 24px) 0',
-          background: hovered ? 'rgba(43,91,168,0.08)' : 'transparent',
+          background: hovered ? 'rgba(38,111,80,0.08)' : 'transparent',
           cursor: 'pointer',
           textAlign: 'left',
           transition: 'background 0.2s',

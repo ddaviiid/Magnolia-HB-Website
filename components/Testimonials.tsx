@@ -85,7 +85,7 @@ export default function Testimonials() {
         }}
         aria-hidden
       >
-    
+        /* &#8220; */
       </div>
 
       <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
@@ -217,7 +217,7 @@ export default function Testimonials() {
                     width: i === current ? 24 : 8,
                     height: 8,
                     borderRadius: 4,
-                    background: i === current ? 'var(--blue)' : 'rgba(43,91,168,0.28)',
+                    background: i === current ? 'var(--blue)' : 'rgba(38,111,80,0.28)',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'width 0.35s ease, background 0.35s ease',
@@ -239,7 +239,7 @@ export default function Testimonials() {
                     width: 40,
                     height: 40,
                     borderRadius: 2,
-                    border: '1px solid rgba(43,91,168,0.3)',
+                    border: '1px solid rgba(38,111,80,0.3)',
                     background: 'transparent',
                     color: 'var(--blue)',
                     fontFamily: 'var(--font-body)',
@@ -251,12 +251,12 @@ export default function Testimonials() {
                     justifyContent: 'center',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(43,91,168,0.1)'
-                    e.currentTarget.style.borderColor = 'rgba(43,91,168,0.6)'
+                    e.currentTarget.style.background = 'rgba(38,111,80,0.1)'
+                    e.currentTarget.style.borderColor = 'rgba(38,111,80,0.6)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.borderColor = 'rgba(43,91,168,0.3)'
+                    e.currentTarget.style.borderColor = 'rgba(38,111,80,0.3)'
                   }}
                 >
                   {label}

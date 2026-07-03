@@ -9,7 +9,7 @@ const reasons = [
     number: '01',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3L3 11V25H11V17H17V25H25V11L14 3Z" stroke="#2B5BA8" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M14 3L3 11V25H11V17H17V25H25V11L14 3Z" stroke="#266F50" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'No Repairs Needed',
@@ -19,8 +19,8 @@ const reasons = [
     number: '02',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="10" stroke="#2B5BA8" strokeWidth="1.5"/>
-        <path d="M10 14L12.5 17L18 11" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="14" cy="14" r="10" stroke="#266F50" strokeWidth="1.5"/>
+        <path d="M10 14L12.5 17L18 11" stroke="#266F50" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'Zero Agent Fees',
@@ -30,11 +30,11 @@ const reasons = [
     number: '03',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="3" y="6" width="22" height="19" rx="2" stroke="#2B5BA8" strokeWidth="1.5"/>
-        <line x1="3" y1="11" x2="25" y2="11" stroke="#2B5BA8" strokeWidth="1.5"/>
-        <line x1="9" y1="3" x2="9" y2="9" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="19" y1="3" x2="19" y2="9" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round"/>
-        <rect x="8" y="16" width="5" height="4" rx="1" fill="#2B5BA8" opacity="0.5"/>
+        <rect x="3" y="6" width="22" height="19" rx="2" stroke="#266F50" strokeWidth="1.5"/>
+        <line x1="3" y1="11" x2="25" y2="11" stroke="#266F50" strokeWidth="1.5"/>
+        <line x1="9" y1="3" x2="9" y2="9" stroke="#266F50" strokeWidth="1.5" strokeLinecap="round"/>
+        <line x1="19" y1="3" x2="19" y2="9" stroke="#266F50" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="8" y="16" width="5" height="4" rx="1" fill="#266F50" opacity="0.5"/>
       </svg>
     ),
     title: 'Close in 7–14 Days',
@@ -44,8 +44,8 @@ const reasons = [
     number: '04',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3L5 8V18C5 22 9 25 14 27C19 25 23 22 23 18V8L14 3Z" stroke="#2B5BA8" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M10 14L12.5 17L18 12" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M14 3L5 8V18C5 22 9 25 14 27C19 25 23 22 23 18V8L14 3Z" stroke="#266F50" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M10 14L12.5 17L18 12" stroke="#266F50" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'Guaranteed Cash',
@@ -69,7 +69,7 @@ function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number
         borderTop: '1px solid rgba(248,244,238,0.07)',
         borderLeft: `3px solid ${hovered ? 'var(--blue)' : 'transparent'}`,
         transition: 'border-color 0.25s, background 0.25s',
-        background: hovered ? 'rgba(43,91,168,0.06)' : 'transparent',
+        background: hovered ? 'rgba(38,111,80,0.06)' : 'transparent',
         cursor: 'default',
       }}
     >
