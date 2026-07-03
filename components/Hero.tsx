@@ -117,7 +117,7 @@ export default function Hero() {
           <span style={{ display: 'block', fontWeight: 800, fontSize: 'clamp(4rem, 8vw, 10rem)', color: 'var(--text-light)' }}>
             Your Home.
           </span>
-          <span style={{ display: 'block', fontWeight: 800, fontSize: 'clamp(3rem, 6vw, 7rem)', color: 'var(--blue)' }}>
+          <span style={{ display: 'block', fontWeight: 800, fontSize: 'clamp(3rem, 6vw, 7rem)', color: '#3EB684' }}>
             Fast. Cash.
           </span>
         </motion.h1>

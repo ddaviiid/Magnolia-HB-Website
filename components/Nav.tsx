@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
-  const [hidden, setHidden] = useState(false)
+  const [hidden, setHidden] = useState(true)
   const lastScrollY = useRef(0)
 
   useEffect(() => {
@@ -14,7 +14,10 @@ export default function Nav() {
       setScrolled(currentY > 40)
 
       if (currentY <= 0) {
-        // At the very top — always show the nav
+        // At the very top / page just loaded — nav stays hidden
+        setHidden(true)
+      } else if (lastScrollY.current <= 0) {
+        // Just started scrolling away from the top — reveal the nav
         setHidden(false)
       } else {
         const delta = currentY - lastScrollY.current
