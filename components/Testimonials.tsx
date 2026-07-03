@@ -105,6 +105,7 @@ export default function Testimonials() {
               fontSize: 'clamp(2.5rem, 5vw, 5rem)',
               lineHeight: 0.95,
               letterSpacing: '-0.01em',
+              color: 'var(--text-dark)',
             }}
           >
             What Our Sellers Say
