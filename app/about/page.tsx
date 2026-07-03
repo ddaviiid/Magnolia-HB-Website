@@ -4,7 +4,7 @@ import Image from 'next/image'
 export const metadata: Metadata = {
   title: 'About Us | Magnolia Home Buyers',
   description:
-    'Learn about Magnolia Home Buyers — who we are, why we started, and our commitment to helping homeowners sell fast with dignity.',
+    'Learn about Magnolia Home Buyers — who we are, why we started, and our commitment to helping Louisiana homeowners sell fast with dignity.',
 }
 
 export default function AboutPage() {
@@ -204,7 +204,7 @@ export default function AboutPage() {
             {[
               "David Machado founded Magnolia Home Buyers after watching family members struggle through the traditional real estate process during one of the hardest periods of their lives. Long listing times, endless showings, repair demands, and deals falling through at the last minute — it didn't have to be this way.",
               "Magnolia was built to be different. We offer homeowners a dignified, straightforward path forward — a fair cash offer, a simple process, and a team that genuinely cares about the outcome. We don't just buy houses. We help families move on.",
-              "Today, Magnolia operates nationwide, having helped hundreds of homeowners sell their properties quickly and on their own terms. Every transaction is handled with the same care and respect David believed every seller deserved from day one.",
+              "Today, Magnolia operates across Louisiana, having helped hundreds of homeowners sell their properties quickly and on their own terms. Every transaction is handled with the same care and respect David believed every seller deserved from day one.",
             ].map((para, i) => (
               <p
                 key={i}
