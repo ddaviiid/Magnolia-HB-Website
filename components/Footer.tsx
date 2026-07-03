@@ -28,7 +28,7 @@ export default function Footer() {
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
-              fontSize: '1.1rem',
+              fontSize: '20.6px',
               color: 'var(--text-light)',
               marginBottom: 12,
             }}
@@ -38,9 +38,9 @@ export default function Footer() {
           <p
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '0.82rem',
+              fontSize: '16.12px',
               fontWeight: 300,
-              color: 'var(--text-muted)',
+              color: 'var(--text-light)',
               lineHeight: 1.7,
               maxWidth: 300,
             }}
@@ -55,11 +55,11 @@ export default function Footer() {
             <div
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.62rem',
+                fontSize: '12.92px',
                 fontWeight: 700,
                 letterSpacing: '0.10em',
                 textTransform: 'uppercase',
-                color: 'var(--text-subtle)',
+                color: 'var(--text-light)',
                 marginBottom: 16,
               }}
             >
@@ -72,15 +72,15 @@ export default function Footer() {
                 style={{
                   display: 'block',
                   fontFamily: 'var(--font-body)',
-                  fontSize: '0.85rem',
+                  fontSize: '16.6px',
                   fontWeight: 400,
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-light)',
                   textDecoration: 'none',
                   marginBottom: 10,
                   transition: 'color 0.2s',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--blue-light)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-light)')}
               >
                 {label}
               </a>
@@ -90,11 +90,11 @@ export default function Footer() {
             <div
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.62rem',
+                fontSize: '12.92px',
                 fontWeight: 700,
                 letterSpacing: '0.10em',
                 textTransform: 'uppercase',
-                color: 'var(--text-subtle)',
+                color: 'var(--text-light)',
                 marginBottom: 16,
               }}
             >
@@ -105,31 +105,31 @@ export default function Footer() {
               style={{
                 display: 'block',
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem',
-                color: 'var(--text-muted)',
+                fontSize: '16.6px',
+                color: 'var(--text-light)',
                 textDecoration: 'none',
                 marginBottom: 10,
                 transition: 'color 0.2s',
               }}
               onMouseEnter={e => (e.currentTarget.style.color = 'var(--blue-light)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-light)')}
             >
               (504) 608-5802
             </a>
             <a
-              href="mailto:info@magnoliahomebuyers.com"
+              href="mailto:david@magnoliahomebuyersusa.com"
               style={{
                 display: 'block',
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem',
-                color: 'var(--text-muted)',
+                fontSize: '16.6px',
+                color: 'var(--text-light)',
                 textDecoration: 'none',
                 transition: 'color 0.2s',
               }}
               onMouseEnter={e => (e.currentTarget.style.color = 'var(--blue-light)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-light)')}
             >
-              info@magnoliahomebuyers.com
+              david@magnoliahomebuyersusa.com
             </a>
           </div>
         </div>
@@ -153,8 +153,8 @@ export default function Footer() {
         <p
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '0.72rem',
-            color: 'var(--text-subtle)',
+            fontSize: '14.52px',
+            color: 'var(--text-light)',
           }}
         >
           © {year} Magnolia Home Buyers LLC. All rights reserved.
@@ -162,8 +162,8 @@ export default function Footer() {
         <p
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '0.72rem',
-            color: 'var(--text-subtle)',
+            fontSize: '14.52px',
+            color: 'var(--text-light)',
           }}
         >
           We are not real estate agents · Cash offers only
