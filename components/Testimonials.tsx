@@ -103,6 +103,7 @@ export default function Testimonials() {
               fontFamily: 'var(--font-display)',
               fontWeight: 400,
               fontSize: 'clamp(2.5rem, 5vw, 5rem)',
+              color: 'var(--blue)',
               lineHeight: 0.95,
               letterSpacing: '-0.01em',
             }}
