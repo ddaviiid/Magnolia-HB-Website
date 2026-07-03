@@ -10,17 +10,16 @@ export default function Nav() {
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY
-      const heroHeight = window.innerHeight
 
       setScrolled(currentY > 40)
 
-      if (currentY < heroHeight) {
-        // Still within the hero section — always show the nav
+      if (currentY <= 0) {
+        // At the very top — always show the nav
         setHidden(false)
       } else {
         const delta = currentY - lastScrollY.current
         if (delta > 5) {
-          // Scrolling down past the hero — hide the nav
+          // Scrolling down — hide the nav
           setHidden(true)
         } else if (delta < -5) {
           // Scrolling up — reveal the nav
