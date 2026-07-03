@@ -12,8 +12,8 @@ export default function AboutPage() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="12" stroke="#2B5BA8" strokeWidth="1.5"/>
-          <path d="M11 16L14.5 20L21 13" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="16" cy="16" r="12" stroke="#266F50" strokeWidth="1.5"/>
+          <path d="M11 16L14.5 20L21 13" stroke="#266F50" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: 'Transparency',
@@ -22,8 +22,8 @@ export default function AboutPage() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="12" stroke="#2B5BA8" strokeWidth="1.5"/>
-          <path d="M16 10V16L20 18" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="16" cy="16" r="12" stroke="#266F50" strokeWidth="1.5"/>
+          <path d="M16 10V16L20 18" stroke="#266F50" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: 'Speed',
@@ -32,7 +32,7 @@ export default function AboutPage() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M16 4L4 10V22C4 27 10 30 16 32C22 30 28 27 28 22V10L16 4Z" stroke="#2B5BA8" strokeWidth="1.5" strokeLinejoin="round"/>
+          <path d="M16 4L4 10V22C4 27 10 30 16 32C22 30 28 27 28 22V10L16 4Z" stroke="#266F50" strokeWidth="1.5" strokeLinejoin="round"/>
         </svg>
       ),
       title: 'Respect',
