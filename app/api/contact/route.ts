@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   try {
     await resend.emails.send({
       from: 'Magnolia Home Buyers <onboarding@resend.dev>',
-      to: [process.env.CONTACT_EMAIL ?? 'info@magnoliahomebuyers.com'],
+      to: [process.env.CONTACT_EMAIL ?? 'david@magnoliahomebuyersusa.com'],
       replyTo: email,
       subject: `New Cash Offer Request: ${name} — ${address}`,
       html: `
