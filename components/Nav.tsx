@@ -24,8 +24,8 @@ export default function Nav() {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 clamp(20px, 5vw, 64px)',
-        background: scrolled ? 'rgba(17,17,17,0.92)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        background: scrolled ? 'rgba(17,17,17,0.92)' : 'rgba(10,10,10,0.75)',
+        backdropFilter: 'blur(16px)',
         borderBottom: scrolled ? '1px solid rgba(248,244,238,0.06)' : '1px solid transparent',
         transition: 'background 0.3s, backdrop-filter 0.3s, border-color 0.3s',
       }}

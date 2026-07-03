@@ -32,7 +32,7 @@ export default function CTASection() {
             fontWeight: 800,
             fontSize: 'clamp(2.8rem, 6vw, 6rem)',
             letterSpacing: '-0.04em',
-            lineHeight: 0.92,
+            lineHeight: 1.1,
             color: 'var(--text-light)',
           }}
         >

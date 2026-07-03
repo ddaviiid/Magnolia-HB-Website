@@ -94,6 +94,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
           variants={fadeUp}
+          style={{ color: 'var(--text-light)' }}
         >
           Louisiana Cash Home Buyers
         </motion.span>

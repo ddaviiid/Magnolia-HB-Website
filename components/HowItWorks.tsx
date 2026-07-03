@@ -121,6 +121,7 @@ export default function HowItWorks() {
                 fontSize: 'clamp(2.8rem, 5.5vw, 5.5rem)',
                 lineHeight: 0.9,
                 letterSpacing: '-0.01em',
+                color: 'var(--text-dark)',
               }}
             >
               Three Steps to

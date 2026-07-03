@@ -8,19 +8,19 @@ const testimonials = [
   {
     quote: "We inherited my grandmother's house and had no idea what to do. Magnolia gave us a fair offer within 24 hours and we closed in 10 days. They handled everything — we didn't have to lift a finger.",
     name: 'Sarah M.',
-    location: 'Memphis, TN',
+    location: 'Metairie, LA',
     situation: 'Inherited Property · Closed in 10 Days',
   },
   {
     quote: "Our home had significant water damage from a burst pipe. No traditional buyer would touch it. Magnolia made us a cash offer as-is, no repairs required. We walked away with more than we expected.",
     name: 'James & Cora T.',
-    location: 'Houston, TX',
+    location: 'Kenner, LA',
     situation: 'Damaged Home · Closed in 8 Days',
   },
   {
     quote: "Going through a divorce is hard enough. The last thing I wanted was to deal with showings, agents, and negotiations. Magnolia made the whole process painless. One offer, one close, done.",
     name: 'Patricia W.',
-    location: 'Atlanta, GA',
+    location: 'New Orleans, LA',
     situation: 'Divorce Sale · Closed in 12 Days',
   },
 ]
@@ -85,7 +85,7 @@ export default function Testimonials() {
         }}
         aria-hidden
       >
-       /* &#8220; */
+        /* &#8220; */
       </div>
 
       <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
@@ -230,7 +230,7 @@ export default function Testimonials() {
             {/* Prev / Next */}
             <div style={{ display: 'flex', gap: 8 }}>
               {([{ fn: () => { prev(); resetInterval() }, label: '←' },
-                { fn: () => { next(); resetInterval() }, label: '→' }] as const).map(({ fn, label }) => (
+              { fn: () => { next(); resetInterval() }, label: '→' }] as const).map(({ fn, label }) => (
                 <button
                   key={label}
                   onClick={fn}

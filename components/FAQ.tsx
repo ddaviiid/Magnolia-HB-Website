@@ -33,8 +33,8 @@ const faqs = [
     a: 'We can often work with properties that have liens, back taxes, or other encumbrances. Our team has experience navigating these situations. Tell us your full situation and we\'ll explore solutions.',
   },
   {
-    q: 'Do you buy homes in my state?',
-    a: 'Yes — we operate nationwide across all 50 states. Whether you\'re in Louisiana, Texas, Florida, California, or anywhere in between, we can help.',
+    q: 'Do you buy homes in my area?',
+    a: 'Yes — we operate across Louisiana, including New Orleans, Metairie, Kenner, Baton Rouge, Shreveport, Lafayette, and every parish in between. Not sure if we cover your area? Just reach out.',
   },
 ]
 
