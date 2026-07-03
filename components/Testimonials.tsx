@@ -85,7 +85,7 @@ export default function Testimonials() {
         }}
         aria-hidden
       >
-        /* &#8220; */
+    
       </div>
 
       <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
