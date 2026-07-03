@@ -5,34 +5,34 @@
 /* ── Layer 1: CSS Variables ─────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg-dark:        #111111;
-  --bg-mid:         #1A1A1A;
-  --bg-card:        #222222;
-  --bg-cream:       #F8F4EE;
-  --bg-parchment:   #EDE7D9;
-  --bg-footer:      #0A0A0A;
+  --bg-dark: #111111;
+  --bg-mid: #1A1A1A;
+  --bg-card: #222222;
+  --bg-cream: #EEE5D7;
+  --bg-parchment: #E4D8C4;
+  --bg-footer: #0A0A0A;
 
   /* Accent */
-  --blue:           #2B5BA8;
-  --blue-light:     #3D6FBF;
-  --blue-pale:      #D6E4F7;
-  --blue-border:    rgba(43, 91, 168, 0.2);
-  --blue-border-md: rgba(43, 91, 168, 0.4);
+  --blue: #266F50;
+  --blue-light: #388367;
+  --blue-pale: #DCEAE2;
+  --blue-border: rgba(38, 111, 80, 0.2);
+  --blue-border-md: rgba(38, 111, 80, 0.4);
 
   /* Text */
-  --text-light:      #F8F4EE;
-  --text-muted:      rgba(248, 244, 238, 0.45);
-  --text-subtle:     rgba(248, 244, 238, 0.22);
-  --text-dark:       #111111;
+  --text-light: #EEE5D7;
+  --text-muted: rgba(238, 229, 215, 0.45);
+  --text-subtle: rgba(238, 229, 215, 0.22);
+  --text-dark: #111111;
   --text-dark-muted: rgba(17, 17, 17, 0.5);
 
   /* Fonts — single font family */
   --font-display: var(--font-jakarta), 'Helvetica Neue', Arial, sans-serif;
-  --font-body:    var(--font-jakarta), 'Helvetica Neue', Arial, sans-serif;
+  --font-body: var(--font-jakarta), 'Helvetica Neue', Arial, sans-serif;
 
   /* Spacing */
-  --section-gap:  clamp(80px, 12vw, 160px);
-  --section-pad:  clamp(64px, 10vw, 128px);
+  --section-gap: clamp(80px, 12vw, 160px);
+  --section-pad: clamp(64px, 10vw, 128px);
 }
 
 /* ── Layer 2: Base Resets ───────────────────────────────── */
@@ -90,12 +90,12 @@ body::after {
 /* ── Layer 4: Keyframe Animations ───────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%       { opacity: 1;   transform: scale(1.3); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 /* ── Layer 5: Section Clip-Path Transitions ─────────────── */
