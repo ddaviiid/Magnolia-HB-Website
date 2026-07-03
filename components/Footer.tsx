@@ -166,7 +166,7 @@ export default function Footer() {
             color: 'var(--text-light)',
           }}
         >
-          We are not real estate agents · Cash offers only
+          
         </p>
       </div>
 
