@@ -46,11 +46,13 @@ html {
   scroll-behavior: smooth;
   background: #111111;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 body {
   width: 100%;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   font-family: var(--font-body);
   background-color: var(--bg-dark);
   color: var(--text-light);
