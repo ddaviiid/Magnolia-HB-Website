@@ -3,26 +3,10 @@
 import { useEffect, useState } from 'react'
 
 export default function Nav() {
-  const [hidden, setHidden] = useState(true)
   // Tone of whatever section is currently scrolled behind the nav.
   // 'dark' = dark background → nav renders light text.
   // 'light' = light background → nav renders dark text.
   const [tone, setTone] = useState<'dark' | 'light'>('dark')
-
-  useEffect(() => {
-    const onScroll = () => {
-      // Hidden at the very top / on load. Once scrolling starts, reveal
-      // the nav and keep it fixed in place — no more hiding on scroll.
-      if (window.scrollY > 0) {
-        setHidden(false)
-      } else {
-        setHidden(true)
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     const navHeight = 76
@@ -74,8 +58,7 @@ export default function Nav() {
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
         borderBottom: '1px solid transparent',
-        transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
-        transition: 'transform 0.35s ease, color 0.25s ease',
+        transition: 'color 0.25s ease',
       }}
     >
       {/* Logo */}
