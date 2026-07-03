@@ -85,7 +85,7 @@ export default function Testimonials() {
         }}
         aria-hidden
       >
-        &#8220;
+       /* &#8220; */
       </div>
 
       <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
@@ -103,7 +103,6 @@ export default function Testimonials() {
               fontFamily: 'var(--font-display)',
               fontWeight: 400,
               fontSize: 'clamp(2.5rem, 5vw, 5rem)',
-              color: 'var(--blue)',
               lineHeight: 0.95,
               letterSpacing: '-0.01em',
             }}
