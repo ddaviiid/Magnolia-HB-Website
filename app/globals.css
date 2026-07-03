@@ -8,8 +8,8 @@
   --bg-dark: #111111;
   --bg-mid: #1A1A1A;
   --bg-card: #222222;
-  --bg-cream: #EEE5D7;
-  --bg-parchment: #E4D8C4;
+  --bg-cream: #FFFFFF;
+  --bg-parchment: #FFFFFF;
   --bg-footer: #0A0A0A;
 
   /* Accent */
@@ -20,9 +20,9 @@
   --blue-border-md: rgba(38, 111, 80, 0.4);
 
   /* Text */
-  --text-light: #EEE5D7;
-  --text-muted: rgba(238, 229, 215, 0.45);
-  --text-subtle: rgba(238, 229, 215, 0.22);
+  --text-light: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --text-subtle: rgba(255, 255, 255, 0.22);
   --text-dark: #111111;
   --text-dark-muted: rgba(17, 17, 17, 0.5);
 
