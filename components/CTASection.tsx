@@ -7,9 +7,8 @@ export default function CTASection() {
   return (
     <section
       style={{
-        background: 'var(--bg-dark)',
+        background: 'var(--bg-cream)',
         paddingTop: 'var(--section-gap)',
-        paddingBottom: 'clamp(56px, 8vw, 96px)',
       }}
       id="contact"
     >
@@ -33,7 +32,7 @@ export default function CTASection() {
             fontSize: 'clamp(2.8rem, 6vw, 6rem)',
             letterSpacing: '-0.04em',
             lineHeight: 1.1,
-            color: 'var(--text-light)',
+            color: 'var(--text-dark)',
           }}
         >
           Ready to{' '}

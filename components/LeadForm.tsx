@@ -105,7 +105,7 @@ export default function LeadForm() {
   return (
     <section
       style={{
-        background: 'var(--bg-cream)',
+        background: 'transparent',
         padding: 'clamp(48px, 6vw, 72px) clamp(24px, 6vw, 80px) var(--section-gap)',
       }}
     >
